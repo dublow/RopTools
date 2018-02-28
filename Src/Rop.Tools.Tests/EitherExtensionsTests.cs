@@ -1,5 +1,6 @@
 ﻿using NFluent;
 using NUnit.Framework;
+using System;
 
 namespace Rop.Tools.Tests
 {
@@ -26,6 +27,18 @@ namespace Rop.Tools.Tests
 
             Check.That(actual).InheritsFrom<Either<Error, string>>();
             Check.That(actual).InheritsFrom<Right<Error, string>>();
+        }
+
+        [Test]
+        public void ShouldMapEitherWithFuncToLeft()
+        {
+            Either<Error, User> either = new Error("Error message");
+            Func<User, Either<Error, string>> nextEither = (User u) => "Other message";
+
+            Either<Error, string> actual = either.Map(nextEither);
+
+            Check.That(actual).InheritsFrom<Either<Error, string>>();
+            Check.That(actual).InheritsFrom<Left<Error, string>>();
         }
 
         private class User
