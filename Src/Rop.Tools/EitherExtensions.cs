@@ -18,6 +18,8 @@ namespace Rop.Tools
 
         public static TRight
             Reduce<TLeft, TRight>(this Either<TLeft, TRight> either, Func<TLeft, TRight> map) =>
-                throw new NotImplementedException();
+                either is Left<TLeft, TRight> left
+                    ? map(left)
+                    : (Right<TLeft, TRight>)either;
     }
 }
