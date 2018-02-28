@@ -46,6 +46,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EitherExtensionsTests.cs" />
     <Compile Include="EnumerableExtensionsTests.cs" />
     <Compile Include="OptionExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
