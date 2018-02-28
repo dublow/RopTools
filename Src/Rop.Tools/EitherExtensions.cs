@@ -12,6 +12,8 @@ namespace Rop.Tools
 
         public static Either<TLeft, TNewRight>
             Map<TLeft, TRight, TNewRight>(this Either<TLeft, TRight> either, Func<TRight, Either<TLeft, TNewRight>> map) =>
-                throw new NotImplementedException();
+                either is Right<TLeft, TRight> right
+                    ? map(right)
+                    : (TLeft)(Left<TLeft, TRight>)either;
     }
 }
