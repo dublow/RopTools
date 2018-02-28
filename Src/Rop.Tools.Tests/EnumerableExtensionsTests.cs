@@ -19,5 +19,18 @@ namespace Rop.Tools.Tests
             Check.That(actual).InheritsFrom<IEnumerable<bool>>();
             Check.That(actual).ContainsExactly(true, true, true);
         }
+
+        [Test]
+        public void ShouldFlattenOnlyItemOfTypeSomeAndReturnEmptySequence()
+        {
+            var evens = new[] { 1, 3, 5 };
+
+            var actual = evens.Flatten(x => x
+                .When(y => (y % 2) == 0)
+                .Map(z => true));
+
+            Check.That(actual).InheritsFrom<IEnumerable<bool>>();
+            Check.That(actual).IsEmpty();
+        }
     }
 }
