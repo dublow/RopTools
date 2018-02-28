@@ -53,13 +53,37 @@ namespace Rop.Tools.Tests
             Check.That(actual).InheritsFrom<Right<Error, string>>();
         }
 
-        private class User
+        [Test]
+        public void ShouldReduceEitherToLeft()
+        {
+            Either<Error, IUser> either = new Error("Error message");
+
+            IUser expected = either.Reduce(error => new InvalidUser(error.Message));
+
+            Check.That(expected).IsInstanceOf<InvalidUser>();
+            Check.That(((InvalidUser)expected).ErrorMessage).IsEqualTo("Error message");
+        }
+
+        private interface IUser
+        { }
+
+        private class User : IUser
         {
             public string Name { get; }
 
             public User(string name)
             {
                 Name = name;
+            }
+        }
+
+        private class InvalidUser : IUser
+        {
+            public string ErrorMessage { get; }
+
+            public InvalidUser(string errorMessage)
+            {
+                ErrorMessage = errorMessage;
             }
         }
 
