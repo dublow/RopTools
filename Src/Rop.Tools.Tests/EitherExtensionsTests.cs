@@ -9,7 +9,7 @@ namespace Rop.Tools.Tests
         [Test]
         public void ShouldMapEitherToLeft()
         {
-            Either<Error, User> either = (Left<Error, User>)new Error("Error message");
+            Either<Error, User> either = new Error("Error message");
 
             Either<Error, string> actual = either.Map(user => user.Name);
 
