@@ -17,7 +17,7 @@ namespace Rop.Tools.Tests
                 .Map(z => true));
 
             Check.That(actual).InheritsFrom<IEnumerable<bool>>();
-
+            Check.That(actual).ContainsExactly(true, true, true);
         }
     }
 }
