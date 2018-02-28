@@ -64,6 +64,17 @@ namespace Rop.Tools.Tests
             Check.That(((InvalidUser)expected).ErrorMessage).IsEqualTo("Error message");
         }
 
+        [Test]
+        public void ShouldReduceEitherToRight()
+        {
+            Either<Error, IUser> either = new User("Nicolas");
+
+            IUser expected = either.Reduce(error => new InvalidUser(error.Message));
+
+            Check.That(expected).IsInstanceOf<User>();
+            Check.That(((User)expected).Name).IsEqualTo("Nicolas");
+        }
+
         private interface IUser
         { }
 
