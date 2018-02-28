@@ -41,6 +41,18 @@ namespace Rop.Tools.Tests
             Check.That(actual).InheritsFrom<Left<Error, string>>();
         }
 
+        [Test]
+        public void ShouldMapEitherWithFuncToRight()
+        {
+            Either<Error, User> either = new User("Nicolas");
+            Func<User, Either<Error, string>> nextEither = (User u) => "Other message";
+
+            Either<Error, string> actual = either.Map(nextEither);
+
+            Check.That(actual).InheritsFrom<Either<Error, string>>();
+            Check.That(actual).InheritsFrom<Right<Error, string>>();
+        }
+
         private class User
         {
             public string Name { get; }
